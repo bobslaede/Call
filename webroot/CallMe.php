@@ -89,11 +89,6 @@ class CallMe {
 			$country = file_get_contents($url);
 			if ($country != 'XX') {
 				$this->userCountry = $country;
-				if (isset($this->options['numbers'][$country])) {
-					$this->numberCountry = $country;
-				} else {
-					$this->numberCountry = array_shift(array_keys($this->options['numbers']));
-				}
 			}
 		} catch (Exception $e) {}
 	}
@@ -105,8 +100,13 @@ class CallMe {
 				$json = json_decode($strJSON, true);
 				if ($json) {
 					$location = $json['features'][0]['properties']['reverseGeocode'];
-					$location = array_pop(explode(' ',$location));
-					$this->latitudeLocation = $location;
+					$country = array_pop(explode(' ',$location));
+					$this->latitudeLocation = $country;
+					if (isset($this->options['numbers'][$country])) {
+						$this->numberCountry = $country;
+					} else {
+						$this->numberCountry = array_shift(array_keys($this->options['numbers']));
+					}
 				}
 			} catch (Exception $e) {}
 	}
