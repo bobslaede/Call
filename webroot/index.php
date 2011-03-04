@@ -59,7 +59,6 @@ foreach ($buttons as $button) {
 			break;
 		case 'skypephone':
 			$title = 'Skype to Phone';
-			$sub = $location;
 			break;
 		case 'skypecall':
 			$title = 'Skype to Skype';
