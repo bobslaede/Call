@@ -10,6 +10,7 @@ class CallMe {
 	protected $userCountry = '';
 	protected $isMobile = false;
 	protected $callProto = 'callto:';
+	protected $numberCountry = '';
 
 	public function __construct($options) {
 			$this->options = $options;
@@ -24,8 +25,9 @@ class CallMe {
 					$this->options['numbers'] = array();
 			}
 			if ($this->latitudeLocation) {
-					$country = $this->options['numbers'][$this->latitudeLocation];
-					if (!$country) {
+					if (isset($this->options['numbers'][$this->latitudeLocation])) {
+						$country = $this->options['numbers'][$this->latitudeLocation];
+					} else {
 						$country = array_shift($this->options['numbers']);
 					}
 			} else {
@@ -56,13 +58,13 @@ class CallMe {
 				'href' => 'sms:' . $this->_getNumber('cell')
 			);
 		}
-		if ($this->skypeStatus == 'Online' && !$this->isMobile) {
-			foreach ($this->_getAllNumbers() as $k => $num) {
-				$buttons[] = array(
-					'type' => 'skypephone',
-					'href' => $this->callProto . $num
-				);
-			}
+		foreach ($this->_getAllNumbers() as $k => $num) {
+			$buttons[] = array(
+				'type' => 'skypephone',
+				'href' => $this->callProto . $num
+			);
+		}
+		if ($this->skypeStatus == 'Online' /*&& !$this->isMobile*/) {
 			$buttons[] = array(
 				'type' => 'skypecall',
 				'href' => 'skype:'. $this->options['skype']
@@ -87,6 +89,11 @@ class CallMe {
 			$country = file_get_contents($url);
 			if ($country != 'XX') {
 				$this->userCountry = $country;
+				if (isset($this->options['numbers'][$country])) {
+					$this->numberCountry = $country;
+				} else {
+					$this->numberCountry = array_shift(array_keys($this->options['numbers']));
+				}
 			}
 		} catch (Exception $e) {}
 	}
@@ -115,7 +122,7 @@ class CallMe {
 	}
 
 	public function getLocation() {
-		return $this->latitudeLocation;
+		return $this->numberCountry;
 	}
 
 }
