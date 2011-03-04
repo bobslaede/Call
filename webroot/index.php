@@ -33,9 +33,7 @@ $callme = new CallMe($options);
 	<meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<meta http-equiv="cleartype" content="on">
-  <link rel="shortcut icon" href="//static.dev1.bobslaede.dk/contact/favicon.ico">
-  <link rel="apple-touch-icon" href="//static.dev1.bobslaede.dk/contact/apple-touch-icon.png">
-  <link rel="stylesheet" href="//static.dev1.bobslaede.dk/contact/css/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -76,10 +74,6 @@ foreach ($buttons as $button) {
 ?>
 		</ul>
 	</div>
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-  <script>window.jQuery || document.write(unescape('%3Cscript src="//static.dev1.bobslaede.dk/shared/js/libs/jquery-1.5.min.js"%3E%3C/script%3E'))</script>
-  <script src="//static.dev1.bobslaede.dk/contact/js/contact.js"></script>
 
 </body>
 </html>
