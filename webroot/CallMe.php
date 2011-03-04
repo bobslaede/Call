@@ -84,7 +84,7 @@ class CallMe {
 	private function _getUserLocation() {
 		try {
 			// nginx forwarded IP check
-			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADD'];
+			$ip = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
 			$url = $this->hostipUrl . $ip;
 			$country = file_get_contents($url);
 			if ($country != 'XX') {
